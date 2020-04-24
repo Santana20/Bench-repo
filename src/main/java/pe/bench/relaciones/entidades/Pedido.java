@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,9 +32,8 @@ public class Pedido {
 	@JsonIgnore
 	private Cliente cliente;
 	
-	@JoinTable(name="pedido_producto",joinColumns =@JoinColumn(name="fk_pedido"),inverseJoinColumns = @JoinColumn(name="fk_producto") )
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<Producto> productos;
+	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<Producto_Pedido> productos_pedido;
 	
 	
 	
@@ -61,12 +61,13 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public List<Producto> getProductos() {
-		return productos;
+	public List<Producto_Pedido> getProductos_pedido() {
+		return productos_pedido;
 	}
-	public void setProducto(List<Producto> productos) {
-		this.productos = productos;
+	public void setProductos_pedido(List<Producto_Pedido> productos_pedido) {
+		this.productos_pedido = productos_pedido;
 	}
+	
 
 
 

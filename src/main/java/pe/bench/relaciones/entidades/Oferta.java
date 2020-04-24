@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,10 +34,12 @@ public class Oferta {
 	@JoinColumn(name="id_Pizzeria")
 	@JsonIgnore
 	private Pizzeria pizzeria;
-	private Long prueba;
-	@JoinTable(name="oferta_producto",joinColumns =@JoinColumn(name="fk_oferta"),inverseJoinColumns = @JoinColumn(name="fk_producto") )
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<Producto> productos;
+	@OneToMany(mappedBy = "oferta",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<Oferta_Producto> oferta_productos;
+	
+	
+	private Double descuento;
+	private Double monto_total;
 	
 	
 	
@@ -76,11 +79,24 @@ public class Oferta {
 	public void setPizzeria(Pizzeria pizzeria) {
 		this.pizzeria = pizzeria;
 	}
-	public List<Producto> getProductos() {
-		return productos;
+	
+	public List<Oferta_Producto> getOferta_productos() {
+		return oferta_productos;
 	}
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
+	public void setOferta_productos(List<Oferta_Producto> oferta_productos) {
+		this.oferta_productos = oferta_productos;
+	}
+	public Double getDescuento() {
+		return descuento;
+	}
+	public void setDescuento(Double descuento) {
+		this.descuento = descuento;
+	}
+	public Double getMonto_total() {
+		return monto_total;
+	}
+	public void setMonto_total(Double monto_total) {
+		this.monto_total = monto_total;
 	}
 	
 

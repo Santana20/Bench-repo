@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,11 +29,11 @@ public class Producto {
 	@JoinColumn(name="id_Pizzeria")
 	@JsonIgnore
 	private Pizzeria pizzeria; 
-	@ManyToMany(mappedBy = "productos")
-	private List<Oferta> ofertas;
+	@OneToMany(mappedBy = "producto")
+	private List<Oferta_Producto> oferta_productos;
 	
-	@ManyToMany(mappedBy = "productos")
-	private List<Pedido> pedidos;
+	@OneToMany(mappedBy = "producto")
+	private List<Producto_Pedido> productos_pedido;
 	
 	
 	public Long getCodigo() {
@@ -65,17 +66,18 @@ public class Producto {
 	public void setPizzeria(Pizzeria pizzeria) {
 		this.pizzeria = pizzeria;
 	}
-	public List<Oferta> getOfertas() {
-		return ofertas;
+	public List<Oferta_Producto> getOferta_productos() {
+		return oferta_productos;
 	}
-	public void setOfertas(List<Oferta> ofertas) {
-		this.ofertas = ofertas;
+	public void setOferta_productos(List<Oferta_Producto> oferta_productos) {
+		this.oferta_productos = oferta_productos;
 	}
-	public List<Pedido> getPedidos() {
-		return pedidos;
+	public List<Producto_Pedido> getProductos_pedido() {
+		return productos_pedido;
 	}
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
+	public void setProductos_pedido(List<Producto_Pedido> productos_pedido) {
+		this.productos_pedido = productos_pedido;
 	}
+
 
 }
