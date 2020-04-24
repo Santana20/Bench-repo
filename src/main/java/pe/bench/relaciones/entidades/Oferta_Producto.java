@@ -28,8 +28,8 @@ public class Oferta_Producto {
 	@JoinColumn(name="id_Oferta")
 	@JsonIgnore
 	private Oferta oferta;
-	private Long cantidad_pedida;
-	private Double precio;
+	
+	private Double descuento;
 	private Double subtotal;
 	
 	
@@ -52,17 +52,13 @@ public class Oferta_Producto {
 	public void setOferta(Oferta oferta) {
 		this.oferta = oferta;
 	}
-	public Long getCantidad_pedida() {
-		return cantidad_pedida;
+
+
+	public Double getDescuento() {
+		return descuento;
 	}
-	public void setCantidad_pedida(Long cantidad_pedida) {
-		this.cantidad_pedida = cantidad_pedida;
-	}
-	public Double getPrecio() {
-		return precio;
-	}
-	public void setPrecio(Double precio) {
-		this.precio = precio;
+	public void setDescuento(Double descuento) {
+		this.descuento = descuento;
 	}
 	public Double getSubtotal() {
 		return subtotal;
