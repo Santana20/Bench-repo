@@ -27,7 +27,7 @@ public class OfertaProductoServicio {
 		Oferta of=null;
 		Producto pro=null;
 		if(oferprod.getOferta()!=null)
-		of= ofertaRepositorio.findById(oferprod.getOferta().getCodigo()).orElseThrow(()-> new Exception ("no encontrado"));
+		of= ofertaRepositorio.findById(oferprod.getOferta().getCodigo()).orElseThrow(()-> new Exception ("no encontrado oferta"));
 		if(oferprod.getProducto()!=null)
 		pro= productoRepositorio.findById(oferprod.getProducto().getCodigo()).orElseThrow(()-> new Exception ("no encontrado"));
 		
