@@ -1,9 +1,12 @@
 package pe.bench.relaciones.entidades;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,22 +20,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="TP_PRODUCTO")
-public class Producto {
+public class Producto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_Producto")
 	private Long codigo;
 	private String nombre;
 	private String descripcion;
-	private Long precio;
+	private Double precio;
 	@ManyToOne
 	@JoinColumn(name="id_Pizzeria")
 	@JsonIgnore
 	private Pizzeria pizzeria; 
-	@OneToMany(mappedBy = "producto")
+	@OneToMany(mappedBy = "producto", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Oferta_Producto> oferta_productos;
 	
-	@OneToMany(mappedBy = "producto")
+	@OneToMany(mappedBy = "producto", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Producto_Pedido> productos_pedido;
 	
 	
@@ -54,10 +57,10 @@ public class Producto {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public Long getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
-	public void setPrecio(Long precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 	public Pizzeria getPizzeria() {

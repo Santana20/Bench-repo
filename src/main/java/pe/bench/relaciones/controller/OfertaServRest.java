@@ -32,10 +32,11 @@ public class OfertaServRest {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No registro ps");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
 		}
 		return of;
 	}
+	
 	@PutMapping("/actualizarOferta/{codigo}")
 	public Oferta actualizarOferta(@RequestBody Oferta oferta, @PathVariable(value = "codigo")Long codigo) 
 	{

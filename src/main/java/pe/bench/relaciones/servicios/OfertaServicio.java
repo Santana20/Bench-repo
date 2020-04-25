@@ -1,21 +1,28 @@
 package pe.bench.relaciones.servicios;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.bench.relaciones.entidades.Oferta;
+import pe.bench.relaciones.entidades.Oferta_Producto;
+import pe.bench.relaciones.repositorios.OfertaProductoRepositorio;
 import pe.bench.relaciones.repositorios.OfertaRepositorio;
 
 @Service
-
 public class OfertaServicio {
 	@Autowired
 	private OfertaRepositorio ofertaRepositorio;
+	@Autowired
+	private OfertaProductoRepositorio OPR;
 	
 	public Oferta registrarOferta(Oferta oferta)
 	{
 		return ofertaRepositorio.save(oferta);
 	}
+	
+	
 	public Oferta actualizarOferta(Oferta oferta, Long codigo) throws Exception
 	{
 		Oferta of=ofertaRepositorio.findById(codigo).orElseThrow(()->new Exception("ta fregado el lambda"));

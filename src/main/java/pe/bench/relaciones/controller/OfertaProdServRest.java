@@ -20,19 +20,18 @@ public class OfertaProdServRest {
 	
 	@Autowired
 	private OfertaProductoServicio ofertaProductoServicio;
+	
 	@PostMapping("/detallarOferta")
-	public Oferta_Producto registraroferta_producto(@RequestBody Oferta_Producto oferprod) 
+	public Oferta_Producto registraroferta_producto(Oferta_Producto oferprod) 
 	{ 
 		Oferta_Producto ofpro= null;
 		try {
-			ofpro=ofertaProductoServicio.registraroferta_producto(oferprod);
+			ofpro = ofertaProductoServicio.registraroferta_producto(oferprod);
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
 		}
-		return ofpro;
-
-		
+		return ofpro;		
 	}
 
 }

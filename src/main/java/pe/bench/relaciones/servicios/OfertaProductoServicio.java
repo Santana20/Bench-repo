@@ -1,7 +1,10 @@
 package pe.bench.relaciones.servicios;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import pe.bench.relaciones.entidades.Oferta;
 import pe.bench.relaciones.entidades.Oferta_Producto;
@@ -13,8 +16,9 @@ import pe.bench.relaciones.repositorios.ProductoRepositorio;
 @Service
 
 public class OfertaProductoServicio {
-	@Autowired
 	
+	
+	@Autowired
 	private OfertaRepositorio ofertaRepositorio;
 	@Autowired
 	
@@ -22,18 +26,29 @@ public class OfertaProductoServicio {
 	@Autowired
 	private OfertaProductoRepositorio ofertaProductoRepositorio;
 	
-	public Oferta_Producto registraroferta_producto( Oferta_Producto oferprod) throws Exception
+	@Transactional
+	public Oferta_Producto registraroferta_producto(Oferta_Producto oferprod) throws Exception
 	{ 
 		Oferta of=null;
 		Producto pro=null;
-		if(oferprod.getOferta()!=null)
-		of= ofertaRepositorio.findById(oferprod.getOferta().getCodigo()).orElseThrow(()-> new Exception ("no encontrado oferta"));
-		if(oferprod.getProducto()!=null)
-		pro= productoRepositorio.findById(oferprod.getProducto().getCodigo()).orElseThrow(()-> new Exception ("no encontrado"));
+		Oferta_Producto aux = oferprod;
 		
-		oferprod.setSubtotal(oferprod.getDescuento()*pro.getPrecio());
-		oferprod.setProducto(pro);
-		oferprod.setOferta(of);
+		if(oferprod.getProducto()!=null)
+		{
+			Long cod = oferprod.getProducto().getCodigo();
+			pro= productoRepositorio.findProductoById(cod);
+		}
+		
+		if(oferprod.getOferta()!=null)
+		{
+			Long cod = oferprod.getOferta().getCodigo();
+			of= ofertaRepositorio.findProductoById(cod);
+		}
+		
+		aux.setSubtotal(oferprod.getDescuento()*pro.getPrecio());
+		aux.setProducto(pro);
+		aux.setOferta(of);
+		
 		return ofertaProductoRepositorio.save(oferprod);
 		
 	}

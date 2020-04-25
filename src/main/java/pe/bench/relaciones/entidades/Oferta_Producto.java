@@ -1,5 +1,7 @@
 package pe.bench.relaciones.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,24 +15,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="TP_OFERTA_PRODUCTO")
-
-
-public class Oferta_Producto {
+public class Oferta_Producto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_OferProducto")
 	private Long codigo;
-	@ManyToOne
-	@JoinColumn(name="id_Producto")
-	@JsonIgnore
-	private Producto producto;
-	@ManyToOne
-	@JoinColumn(name="id_Oferta")
-	@JsonIgnore
-	private Oferta oferta;
-	
 	private Double descuento;
 	private Double subtotal;
+	
+	@ManyToOne
+	@JoinColumn(name="id_Producto")
+	//@JsonIgnore
+	private Producto producto;
+	
+	@ManyToOne
+	@JoinColumn(name="id_Oferta")
+	//@JsonIgnore
+	private Oferta oferta;
 	
 	
 	

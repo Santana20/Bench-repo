@@ -1,5 +1,6 @@
 package pe.bench.relaciones.entidades;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="TP_CLIENTE")
 
-public class Cliente {
+public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	@Column(name="id_cliente")
