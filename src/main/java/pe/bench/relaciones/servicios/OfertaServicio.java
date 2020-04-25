@@ -19,9 +19,23 @@ public class OfertaServicio {
 	
 	public Oferta registrarOferta(Oferta oferta)
 	{
+		for ( Oferta_Producto aux : oferta.getOferta_productos() )
+		{
+			aux.setOferta(oferta);
+			
+		}
 		return ofertaRepositorio.save(oferta);
+		
 	}
 	
+	public void registrarListaOfertaProducto(List<Oferta_Producto> lista, Oferta oferta)
+	{
+		for ( Oferta_Producto aux : lista )
+		{
+			aux.setOferta(oferta);
+			OPR.save(aux);
+		}
+	}
 	
 	public Oferta actualizarOferta(Oferta oferta, Long codigo) throws Exception
 	{
@@ -34,6 +48,7 @@ public class OfertaServicio {
 		if(oferta.getTitulo()!=null) of.setTitulo(oferta.getTitulo());
 		return of;
 	}
+	
 	public Oferta eliminarOferta(Long  codigo) throws Exception
 	{
 		Oferta of=ofertaRepositorio.findById(codigo).orElseThrow(()->new Exception("ta fregado el lambda x2"));

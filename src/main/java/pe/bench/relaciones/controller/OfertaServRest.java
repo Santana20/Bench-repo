@@ -29,6 +29,7 @@ public class OfertaServRest {
 		Oferta of=null;
 		try {
 			of=ofs.registrarOferta(oferta);
+			//ofs.registrarListaOfertaProducto(oferta.getOferta_productos(), oferta);
 			
 		} catch (Exception e) {
 			// TODO: handle exception

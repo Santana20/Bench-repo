@@ -30,7 +30,7 @@ public class Oferta_Producto implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="id_Oferta")
-	//@JsonIgnore
+	@JsonIgnore
 	private Oferta oferta;
 	
 	

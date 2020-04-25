@@ -29,7 +29,7 @@ public class OfertaProductoServicio {
 	@Transactional
 	public Oferta_Producto registraroferta_producto(Oferta_Producto oferprod) throws Exception
 	{ 
-		Oferta of=null;
+		/*Oferta of=null;
 		Producto pro=null;
 		Oferta_Producto aux = oferprod;
 		
@@ -48,7 +48,7 @@ public class OfertaProductoServicio {
 		aux.setSubtotal(oferprod.getDescuento()*pro.getPrecio());
 		aux.setProducto(pro);
 		aux.setOferta(of);
-		
+		*/
 		return ofertaProductoRepositorio.save(oferprod);
 		
 	}
